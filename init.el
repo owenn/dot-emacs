@@ -24,6 +24,8 @@
 ;;;;;;;;;;;;;;;;;;; some c stuff which I just chucked in, hopefully good :)
 
 (use-package eglot)
+(use-package company)
+
 
 (use-package lsp-mode
   :ensure t
@@ -93,8 +95,9 @@
 
  (setq-default dired-listing-switches "-alh")
 
- (unless package-archive-contents    ; unless packages are not available locally, dont refresh package archives
-   (package-refresh-contents))       ; refreshing package contents is time-consuming and should be done on demand
+;; TBD - 
+ ;; (unless package-archive-contents    ; unless packages are not available locally, dont refresh package archives
+ ;;   (package-refresh-contents))       ; refreshing package contents is time-consuming and should be done on demand
 
  (dolist (pkg my-packages)          
    (unless (package-installed-p pkg)
