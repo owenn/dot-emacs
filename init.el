@@ -19,12 +19,13 @@
   (package-install 'use-package))
 
 
+(use-package web-mode
+  :ensure t)
 
 
 ;;;;;;;;;;;;;;;;;;; some c stuff which I just chucked in, hopefully good :)
 
 (use-package eglot)
-(use-package company)
 
 
 (use-package lsp-mode
@@ -78,9 +79,26 @@
 (add-hook 'c-mode-hook 'eglot-ensure)
 (add-hook 'c++-mode-hook 'eglot-ensure)
 
+(use-package company :ensure t)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; End of stuff which may be good
 
+;;; golang
 
+(require 'company)
+(require 'yasnippet)
+
+(require 'go-mode)
+(require 'eglot)
+(add-hook 'go-mode-hook 'eglot-ensure)
+
+;; Optional: install eglot-format-buffer as a save hook.
+;; The depth of -10 places this before eglot's willSave notification,
+;; so that that notification reports the actual contents that will be saved.
+(defun eglot-format-buffer-before-save ()
+  (add-hook 'before-save-hook #'eglot-format-buffer -10 t))
+(add-hook 'go-mode-hook #'eglot-format-buffer-before-save)
+;;
 
 
 
@@ -171,7 +189,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(ccls lsp-ui lsp-mode)))
+ '(package-selected-packages '(ccls company lsp-mode lsp-ui web-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
